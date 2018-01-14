@@ -1,0 +1,56 @@
+<h3>Entry Fee Calculator</h3>
+<hr />
+
+<div class="line-item line-item-entries row">
+    <span class="col-6 line-item-title">Riders</span>
+    <span class="col-6 line-qty text-right">
+        <button class="btn btn-sm btn-default" (click)="incrementEntryCount(-1)"><i class="fa fa-minus"></i></button>
+        <span>&nbsp;{{entryCount}}&nbsp;</span>
+        <button class="btn btn-sm btn-default" (click)="incrementEntryCount(1)"><i class="fa fa-plus"></i></button>        
+    </span>
+</div>
+
+<div class="line-item line-item-exhibitions row">
+    <span class="col-6 line-item-title">Exhibitions</span>
+    <span class="col-6 line-qty text-right">
+        <button class="btn btn-sm btn-default" (click)="incrementExhibitionCount(-1)"><i class="fa fa-minus"></i></button>
+        <span>&nbsp;{{exhibitionCount}}&nbsp;</span>
+        <button class="btn btn-sm btn-default" (click)="incrementExhibitionCount(1)"><i class="fa fa-plus"></i></button>        
+    </span>
+</div>
+
+<div class="line-item line-item-total-due row">
+    <span class="col-8 line-item-title text-right">Total Due</span>
+    <span class="col-4 text-right">            
+        <span>{{totalDue() | number:'1.2-2'}}</span>                    
+    </span>
+</div>
+
+<div class="line-item line-item-amount-tendered row">
+    <span class="col-8 line-item-title text-right">Total Paid</span>
+    <span class="col-4 text-right">            
+        <form #cashForm="ngForm">
+            <input type="number" class="form-control" name="amountTendered" [(ngModel)]="amountTendered" #name="ngModel">
+        </form>        
+    </span>
+</div>
+
+<div class="line-item line-item-change-due row" *ngIf="changeDue() >= 0">
+    <span class="col-8 line-item-title text-right">Change Due</span>
+    <span class="col-4 text-right form-group">   
+        <span>{{changeDue() | number:'1.2-2'}}</span>                             
+    </span>
+</div>
+
+<div class="line-item line-item-amount-due row text-warning" *ngIf="changeDue() < 0">
+    <span class="col-8 line-item-title text-right">Amount Due</span>
+    <span class="col-4 text-right form-group">   
+        <span>{{changeDue() * -1 | number:'1.2-2'}}</span>                             
+    </span>
+</div>
+
+<div class="row pt-4">
+    <div class="offset-3 col-6">
+        <button class="btn btn-primary btn-lg btn-block" (click)="reset()">Reset</button>
+    </div>
+</div>
